@@ -1,0 +1,21 @@
+{
+  "name": "app-node-express",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "Alan Revilla Huitrón",
+  "type": "module",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@dotenvx/dotenvx": "^1.64.0",
+    "express": "^5.2.1",
+    "morgan": "^1.10.1",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1",
+    "uuid": "^14.0.0"
+  }
+}
