@@ -1,0 +1,33 @@
+name: Deploy Node API
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'node-api/**'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy on server via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SERVER_IP }}
+          username: ubuntu
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            cd /home/ubuntu/proyecto
+
+            echo "📥 Pull latest changes"
+            git pull
+
+            echo "🐳 Rebuild ONLY node-api"
+            docker compose up -d --build node-api
+
+            echo "🧹 Clean unused stuff (optional)"
+            docker system prune -f
+
+            echo "✅ Node deployed successfully"
