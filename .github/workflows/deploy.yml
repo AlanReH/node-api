@@ -2,10 +2,10 @@ name: Deploy Node API
 
 on:
   push:
-    branches:
-      - main
-    paths:
-      - 'node-api/**'
+    # branches:
+    #   - main
+    # paths:
+    #   - 'node-api/**'
 
 jobs:
   deploy:
