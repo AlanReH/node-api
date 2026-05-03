@@ -28,4 +28,4 @@ jobs:
             echo "🧹 Clean unused images"
             docker system prune -f
 
-            echo "✅ Node deployed successfully"
+            echo "✅ Node deployed successfully - $(date)"
