@@ -2,10 +2,6 @@ name: Deploy Node API
 
 on:
   push:
-    # branches:
-    #   - main
-    # paths:
-    #   - 'node-api/**'
 
 jobs:
   deploy:
@@ -21,13 +17,15 @@ jobs:
           script: |
             cd /home/ubuntu/proyecto
 
-            echo "📥 Pull latest changes"
-            git pull
+            echo "📥 Force sync repo"
+            git fetch origin
+            git reset --hard origin/main
 
-            echo "🐳 Rebuild ONLY node-api"
-            docker compose up -d --build node-api
+            echo "🐳 Rebuild node WITHOUT cache"
+            docker compose build --no-cache node-api
+            docker compose up -d node-api
 
-            echo "🧹 Clean unused stuff (optional)"
+            echo "🧹 Clean unused images"
             docker system prune -f
 
             echo "✅ Node deployed successfully"
