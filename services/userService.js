@@ -1,9 +1,9 @@
-import { v4 as uuidv4 } from 'uuid';
+import crypto from 'crypto';
 
 let users = [];
 
 users.push({
-  id: uuidv4(),
+  id: crypto.randomUUID(),
   name: "Alan",
   email: "alan@example.com",
   phone: "+525512345678",
@@ -20,7 +20,7 @@ users.push({
 });
 
 users.push({
-  id: uuidv4(),
+  id: crypto.randomUUID(),
   name: "María",
   email: "maria@example.com",
   phone: "+525587654321",
@@ -66,7 +66,7 @@ const getUsers = (sortedBy, filter) => {
 };
 
 const createUser = (user) => {
-  user.id = uuidv4();
+  user.id = crypto.randomUUID();
   users.push(user);
   return user;
 };
