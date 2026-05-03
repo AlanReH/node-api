@@ -15,7 +15,7 @@ jobs:
           username: ubuntu
           key: ${{ secrets.SSH_KEY }}
           script: |
-            cd /home/ubuntu/proyecto
+            cd /home/ubuntu/node-api
 
             echo "📥 Force sync repo"
             git fetch origin
