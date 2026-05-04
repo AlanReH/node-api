@@ -8,8 +8,10 @@ import dotenvx from '@dotenvx/dotenvx';
 import indexRouter from './routes/index.js';
 import usersRouter from './routes/users.js';
 import { testDBConnection } from './config/db.js';
+import { connectMongo } from './config/mongo.js';
 
 testDBConnection();
+connectMongo();
 
 dotenvx.config();
 

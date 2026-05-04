@@ -27,6 +27,7 @@ export const createUser = async (user) => {
     return user;
 
   } catch (error) {
+    console.error('DB ERROR:', error);
     await client.query('ROLLBACK');
     throw error;
   } finally {

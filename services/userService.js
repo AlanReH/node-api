@@ -32,6 +32,9 @@ const getUsers = async (sortedBy, filter) => {
 const createUser = async (user) => {
   user.id = crypto.randomUUID();
   user.created_at = new Date();
+  if (!user.email) {
+    throw new Error('Email required');
+  }
 
   await createUserMongo(user);
   return await createUserRepo(user);
