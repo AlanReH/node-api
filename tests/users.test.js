@@ -38,7 +38,7 @@ describe('Users API', () => {
       name: "Alan Revilla",
       password: "123456",
       phone: "+525578945612",
-      tax_id: "TEST930101901",
+      tax_id: "TEST930201012",
       addresses: [
         {
           street: "Test",

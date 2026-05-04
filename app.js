@@ -10,7 +10,11 @@ import usersRouter from './routes/users.js';
 import { testDBConnection } from './config/db.js';
 import { connectMongo } from './config/mongo.js';
 
-dotenvx.config();
+if (process.env.NODE_ENV !== 'test') {
+  testDBConnection();
+  connectMongo();
+  dotenvx.config();
+}
 
 const port = process.env.PORT || '3000';
 
@@ -89,8 +93,6 @@ app.set('port', port);
 var server = http.createServer(app);
 // Listen on provided port, on all network interfaces.
 if (process.env.NODE_ENV !== 'test') {
-  testDBConnection();
-  connectMongo();
   server.listen(port);
 }
 server.on('error', onError);

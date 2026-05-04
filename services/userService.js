@@ -3,12 +3,8 @@ import { createUser as createUserRepo, findAllUsers } from '../repositories/user
 import { createUserMongo, getUsersMongo } from '../repositories/userMongoRepository.js';
 import e from 'express';
 const isTest = process.env.NODE_ENV === 'test';
-
-const getUsers = async (sortedBy, filter) => {
-  let users = [];
-
-  if (isTest) {
-    users = [
+let users = isTest
+  ? [
       {
         "id":"e1476bef-c824-4b0b-8581-3d39029feeb4",
         "name":"Alan",
@@ -30,9 +26,11 @@ const getUsers = async (sortedBy, filter) => {
         "addresses":[{"street":"Avenida Siempreviva 456","city":"Guadalajara","country":"México"}]
       }
     ]
-  } else {
-    users = await findAllUsers();
-  }
+  : [];
+
+const getUsers = async (sortedBy, filter) => {
+
+  users = await findAllUsers();
 
   if (sortedBy) {
     users.sort((a, b) => a[sortedBy]?.localeCompare(b[sortedBy]));
@@ -60,6 +58,7 @@ const getUsers = async (sortedBy, filter) => {
 
 const createUser = async (user) => {
   user.id = crypto.randomUUID();
+  user.addresses = user.addresses ?? [];
   user.created_at = new Date();
   if (!user.email) {
     throw new Error('Email required');
