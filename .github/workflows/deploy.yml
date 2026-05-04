@@ -11,11 +11,9 @@ jobs:
 
       - name: Install deps
         run: npm install
-        working-directory: ./node-api
-
+        
       - name: Run tests
         run: npm test
-        working-directory: ./node-api
         
   deploy:
     needs: test
