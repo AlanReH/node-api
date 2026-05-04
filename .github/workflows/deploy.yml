@@ -33,11 +33,13 @@ jobs:
             git fetch origin
             git reset --hard origin/main
 
-            echo "🐳 Rebuild node WITHOUT cache"
-            docker compose build --no-cache node-api
-            docker compose up -d node-api
+            echo "🧹 Clean BEFORE build"
+            docker system prune -af
 
-            echo "🧹 Clean unused images"
-            docker system prune -f
+            echo "🐳 Rebuild node"
+            docker compose build node-api
+
+            echo "🚀 Restart container"
+            docker compose up -d node-api
 
             echo "✅ Node deployed successfully - $(date)"
