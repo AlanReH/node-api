@@ -1,7 +1,9 @@
 import userService from '../services/userService.js';
+import logger from '../utils/logger.js';
 
 const getUsers = (req, res) => {
   try {
+    logger.info('GET /users hit');
     const { sortedBy, filter } = req.query;
     const users = userService.getUsers(sortedBy, filter);
 
