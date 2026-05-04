@@ -10,7 +10,7 @@ const options = {
     },
     servers: [
       {
-        url: "http://localhost:3010/users"
+        url: "/node"
       }
     ],
     components: {
