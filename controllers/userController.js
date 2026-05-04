@@ -1,11 +1,12 @@
 import userService from '../services/userService.js';
 import logger from '../utils/logger.js';
 
-const getUsers = (req, res) => {
+const getUsers = async (req, res) => {
   try {
     logger.info('GET /users hit');
+
     const { sortedBy, filter } = req.query;
-    const users = userService.getUsers(sortedBy, filter);
+    const users = await userService.getUsers(sortedBy, filter);
 
     res.json({
       success: true,
@@ -20,9 +21,9 @@ const getUsers = (req, res) => {
   }
 };
 
-const createUser = (req, res) => {
+const createUser = async (req, res) => {
   try {
-    const user = userService.createUser(req.body);
+    const user = await userService.createUser(req.body);
 
     res.status(201).json({
       success: true,

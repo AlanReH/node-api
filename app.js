@@ -7,6 +7,9 @@ import http from 'http';
 import dotenvx from '@dotenvx/dotenvx';
 import indexRouter from './routes/index.js';
 import usersRouter from './routes/users.js';
+import { testDBConnection } from './config/db.js';
+
+testDBConnection();
 
 dotenvx.config();
 
@@ -23,6 +26,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
 
 // #region Errors
 

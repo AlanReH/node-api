@@ -1,54 +1,18 @@
 import crypto from 'crypto';
+import { createUser as createUserRepo, findAllUsers } from '../repositories/userRepository.js';
+import { createUserMongo, getUsersMongo } from '../repositories/userMongoRepository.js';
 
-let users = [];
-
-users.push({
-  id: crypto.randomUUID(),
-  name: "Alan",
-  email: "alan@example.com",
-  phone: "+525512345678",
-  password: "1234",
-  tax_id: "AARR990101XXX",
-  created_at: new Date(),
-  addresses: [
-    {
-      street: "Calle Falsa 123",
-      city: "Ciudad de México",
-      country: "México"
-    }
-  ]
-});
-
-users.push({
-  id: crypto.randomUUID(),
-  name: "María",
-  email: "maria@example.com",
-  phone: "+525587654321",
-  password: "5678",
-  tax_id: "MARR990101XXX",
-  created_at: new Date(),
-  addresses: [
-    {
-      street: "Avenida Siempreviva 456",
-      city: "Guadalajara",
-      country: "México"
-    }
-  ]
-});
-
-
-
-const getUsers = (sortedBy, filter) => {
-  let result = [...users];
+const getUsers = async (sortedBy, filter) => {
+  let users = await findAllUsers();
 
   if (sortedBy) {
-    result.sort((a, b) => a[sortedBy]?.localeCompare(b[sortedBy]));
+    users.sort((a, b) => a[sortedBy]?.localeCompare(b[sortedBy]));
   }
 
   if (filter) {
     const [field, condition, value] = filter.split("+");
 
-    result = result.filter(u => {
+    users = users.filter(u => {
       const fieldValue = u[field];
       if (!fieldValue) return false;
 
@@ -62,13 +26,15 @@ const getUsers = (sortedBy, filter) => {
     });
   }
 
-  return result;
+  return users;
 };
 
-const createUser = (user) => {
+const createUser = async (user) => {
   user.id = crypto.randomUUID();
-  users.push(user);
-  return user;
+  user.created_at = new Date();
+
+  await createUserMongo(user);
+  return await createUserRepo(user);
 };
 
 export { getUsers, createUser };
