@@ -22,9 +22,7 @@ app.use(express.urlencoded({ extended: false }));
 // #region Routes
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-console.log(`loading swagger spec: ${JSON.stringify(swaggerSpec)}`);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
-console.log(`Swagger UI available at http://localhost:${port}/api-docs`);
 
 // #region Errors
 
@@ -87,6 +85,10 @@ app.set('port', port);
 // Create HTTP server.
 var server = http.createServer(app);
 // Listen on provided port, on all network interfaces.
-server.listen(port);
+if (process.env.NODE_ENV !== 'test') {
+  server.listen(port);
+}
 server.on('error', onError);
 server.on('listening', onListening);
+
+export default app;
