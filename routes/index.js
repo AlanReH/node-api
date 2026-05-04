@@ -10,4 +10,10 @@ router.get('/health', function(req, res, next) {
   res.json({ status: 'OK' });
 });
 
+// metrics
+router.get('/metrics', async (req, res) => {
+  res.set('Content-Type', client.register.contentType);
+  res.end(await client.register.metrics());
+});
+
 export default router;

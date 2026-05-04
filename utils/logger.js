@@ -1,11 +1,7 @@
-import winston from 'winston';
+import pino from 'pino';
 
-const logger = winston.createLogger({
-  level: 'info',
-  format: winston.format.json(),
-  transports: [
-    new winston.transports.Console()
-  ],
+const logger = pino({
+  level: 'info'
 });
 
 export default logger;
