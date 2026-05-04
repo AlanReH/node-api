@@ -22,7 +22,7 @@ import userController from '../controllers/userController.js';
  *       200:
  *         description: Lista de usuarios
  */
-router.get('/users', userController.getUsers);
+router.get('/', userController.getUsers);
 /**
  * @swagger
  * /users:
@@ -44,6 +44,6 @@ router.get('/users', userController.getUsers);
  *       201:
  *         description: Usuario creado
  */
-router.post('/users', userController.createUser);
+router.post('/', userController.createUser);
 
 export default router;
