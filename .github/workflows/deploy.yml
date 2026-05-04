@@ -28,18 +28,15 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           script: |
             cd /home/ubuntu/node-api
-
-            echo "📥 Force sync repo"
+            
+            echo "📥 Sync repo"
             git fetch origin
             git reset --hard origin/main
 
-            echo "🧹 Clean BEFORE build"
-            docker system prune -af
-
-            echo "🐳 Rebuild node"
+            echo "🐳 Rebuild node (light)"
             docker compose build node-api
 
-            echo "🚀 Restart container"
+            echo "🚀 Restart"
             docker compose up -d node-api
 
-            echo "✅ Node deployed successfully - $(date)"
+            echo "✅ Deploy done - $(date)"
