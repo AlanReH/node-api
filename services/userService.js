@@ -1,4 +1,4 @@
-import crypto from 'crypto';
+import { randomUUID } from 'crypto';
 import { createUser as createUserRepo, findAllUsers } from '../repositories/userRepository.js';
 import { createUserMongo, getUsersMongo } from '../repositories/userMongoRepository.js';
 import e from 'express';
@@ -59,7 +59,7 @@ const getUsers = async (sortedBy, filter) => {
 };
 
 const createUser = async (user) => {
-  user.id = crypto.randomUUID();
+  user.id = randomUUID();
   user.addresses = user.addresses ?? [];
   user.created_at = new Date();
   if (!user.email) {
