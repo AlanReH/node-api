@@ -8,7 +8,7 @@ export const createUser = async (user) => {
     await client.query('BEGIN');
 
     // 👤 insert user
-    logger.info({ requestId }, 'Inserting into DB');
+    logger.info('Inserting into DB');
     await client.query(
       `INSERT INTO users (id, email, name, phone, password, tax_id)
        VALUES ($1, $2, $3, $4, $5, $6)`,

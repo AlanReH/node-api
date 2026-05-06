@@ -3,7 +3,7 @@ import logger from '../utils/logger.js';
 
 const getUsers = async (req, res) => {
   try {
-    logger.info('GET /users hit');
+    logger.info({ requestId: req.requestId }, 'GET /users hit');
 
     const { sortedBy, filter } = req.query;
     const users = await userService.getUsers(sortedBy, filter);
@@ -24,7 +24,7 @@ const getUsers = async (req, res) => {
 const createUser = async (req, res) => {
   try {
     logger.info({ requestId: req.requestId }, 'Creating user');
-    
+
     const user = await userService.createUser(req.body);
 
     res.status(201).json({

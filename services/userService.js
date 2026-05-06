@@ -74,7 +74,7 @@ const createUser = async (user) => {
     return user;
   }
 
-  logger.info({ requestId }, 'Calling repositories');
+  logger.info('Calling repositories');
 
   try {
     await createUserMongo(user);
