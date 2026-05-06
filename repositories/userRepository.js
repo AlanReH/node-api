@@ -1,5 +1,5 @@
 import { pool } from '../config/db.js';
-import { logger } from '../utils/logger.js';
+import logger from '../utils/logger.js';
 
 export const createUser = async (user) => {
   const client = await pool.connect();
