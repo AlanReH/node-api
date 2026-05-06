@@ -1,4 +1,5 @@
 import { pool } from '../config/db.js';
+import { logger } from '../config/logger.js';
 
 export const createUser = async (user) => {
   const client = await pool.connect();
@@ -37,6 +38,7 @@ export const createUser = async (user) => {
 };
 
 export const findAllUsers = async () => {
+  logger.info('Getting all users from DB');
   const res = await pool.query(`
     SELECT 
       u.*,

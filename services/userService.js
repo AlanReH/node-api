@@ -2,6 +2,8 @@ import { randomUUID } from 'crypto';
 import { createUser as createUserRepo, findAllUsers } from '../repositories/userRepository.js';
 import { createUserMongo, getUsersMongo } from '../repositories/userMongoRepository.js';
 import e from 'express';
+import logger from '../utils/logger.js';
+
 const isTest = process.env.NODE_ENV === 'test';
 let users = isTest
   ? [
@@ -72,7 +74,7 @@ const createUser = async (user) => {
     return user;
   }
 
-  logger.info({ requestId: req.requestId }, 'Calling repositories');
+  logger.info({ requestId }, 'Calling repositories');
 
   try {
     await createUserMongo(user);
