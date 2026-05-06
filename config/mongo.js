@@ -1,4 +1,9 @@
 import mongoose from 'mongoose';
+import crypto from 'crypto';
+
+if (!globalThis.crypto) {
+  globalThis.crypto = crypto.webcrypto;
+}
 
 export const connectMongo = async () => {
   try {
