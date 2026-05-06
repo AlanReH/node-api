@@ -32,7 +32,8 @@ const getUsers = async (sortedBy, filter) => {
 
   users = isTest
     ? users
-    : await findAllUsers();
+    // : await findAllUsers();
+    : await getUsersMongo();
 
   if (sortedBy) {
     users.sort((a, b) => a[sortedBy]?.localeCompare(b[sortedBy]));
