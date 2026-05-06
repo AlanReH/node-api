@@ -72,12 +72,14 @@ const createUser = async (user) => {
     return user;
   }
 
+  logger.info({ requestId: req.requestId }, 'Calling repositories');
+
   try {
     await createUserMongo(user);
   } catch (err) {
     console.error("Mongo failed, continuing...", err.message);
   }
-  
+
   return await createUserRepo(user);
 };
 

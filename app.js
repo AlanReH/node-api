@@ -9,6 +9,8 @@ import indexRouter from './routes/index.js';
 import usersRouter from './routes/users.js';
 import { testDBConnection } from './config/db.js';
 import { connectMongo } from './config/mongo.js';
+import { requestLogger } from './middlewares/requestLogger.js';
+import { metricsMiddleware } from './middlewares/metricsMiddleware.js';
 
 if (process.env.NODE_ENV !== 'test') {
   testDBConnection();
@@ -24,6 +26,8 @@ const app = express();
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(requestLogger);
+app.use(metricsMiddleware);
 
 // #region Routes
 app.use('/', indexRouter);

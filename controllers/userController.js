@@ -23,6 +23,8 @@ const getUsers = async (req, res) => {
 
 const createUser = async (req, res) => {
   try {
+    logger.info({ requestId: req.requestId }, 'Creating user');
+    
     const user = await userService.createUser(req.body);
 
     res.status(201).json({
